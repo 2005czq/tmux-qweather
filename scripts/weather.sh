@@ -214,6 +214,27 @@ render_module() {
   printf '#[range=user|weather]%s %s#[norange]' "$icon" "$temp"
 }
 
+render_icon() {
+  cache_is_fresh || refresh_cache_async
+  local icon _ _ _
+  IFS=$'\t' read -r icon _ _ _ < <(get_current_weather)
+  printf '#[range=user|weather]%s#[norange]' "$icon"
+}
+
+render_temp() {
+  cache_is_fresh || refresh_cache_async
+  local _ temp _ _
+  IFS=$'\t' read -r _ temp _ _ < <(get_current_weather)
+  printf '#[range=user|weather]%s#[norange]' "$temp"
+}
+
+render_condition() {
+  cache_is_fresh || refresh_cache_async
+  local _ _ cond _
+  IFS=$'\t' read -r _ _ cond _ < <(get_current_weather)
+  printf '#[range=user|weather]%s#[norange]' "$cond"
+}
+
 render_plain() {
   local icon temp cond city
   IFS=$'\t' read -r icon temp cond city < <(get_current_weather)
@@ -329,13 +350,16 @@ show_menu() {
 
 main() {
   case "${1:-module}" in
-    module)  render_module ;;
-    plain)   render_plain ;;
-    select)  select_city "${2:-}" ;;
-    refresh) refresh_now ;;
-    menu)    show_menu "${2:-}" "${3:-}" ;;
-    fetch)   fetch_all_weather ;;
-    *)       render_module ;;
+    module)    render_module ;;
+    icon)      render_icon ;;
+    temp)      render_temp ;;
+    condition) render_condition ;;
+    plain)     render_plain ;;
+    select)    select_city "${2:-}" ;;
+    refresh)   refresh_now ;;
+    menu)      show_menu "${2:-}" "${3:-}" ;;
+    fetch)     fetch_all_weather ;;
+    *)         render_module ;;
   esac
 }
 
