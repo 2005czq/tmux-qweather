@@ -15,7 +15,6 @@
 
 ```tmux
 set -g @plugin '2005czq/tmux-qweather'
-set -g status-right '#{weather}'
 ```
 
 在 tmux 内按 `prefix + I` 通过 TPM 完成安装。
@@ -40,6 +39,15 @@ set -g status-right '#{weather}'
 - `host`：请求域名（默认 `devapi.qweather.com`；若使用的是新控制台项目生成的 Key，请填入专属项目域名 `xxxx.re.qweatherapi.com`）。
 - `current`：默认选中的地点名称。
 - `locations`：多地点经纬度映射（格式为 `"地点名称": "纬度,经度"`）。
+
+## 使用
+
+插件提供以下占位符可供个性化操作：
+
+- `#{weather}`：完整天气信息（图标 + 气温）。
+- `#{weather_icon}`：仅天气图标。
+- `#{weather_temp}`：仅当前气温。
+- `#{weather_condition}`：仅天气状况描述（如 `晴`、`多云`）。
 
 ## 开源协议
 
