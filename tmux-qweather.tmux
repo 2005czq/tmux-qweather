@@ -12,8 +12,21 @@ interpolate_option() {
   local option="$1"
   local val
   val="$(tmux show-option -gqv "$option" 2>/dev/null || true)"
-  if [[ "$val" == *'#{weather}'* ]]; then
-    tmux set-option -gq "$option" "${val//\#\{weather\}/#(${SCRIPT_PATH})}"
+  local updated="$val"
+  if [[ "$updated" == *'#{weather}'* ]]; then
+    updated="${updated//\#\{weather\}/#(${SCRIPT_PATH})}"
+  fi
+  if [[ "$updated" == *'#{weather_icon}'* ]]; then
+    updated="${updated//\#\{weather_icon\}/#(${SCRIPT_PATH} icon)}"
+  fi
+  if [[ "$updated" == *'#{weather_temp}'* ]]; then
+    updated="${updated//\#\{weather_temp\}/#(${SCRIPT_PATH} temp)}"
+  fi
+  if [[ "$updated" == *'#{weather_condition}'* ]]; then
+    updated="${updated//\#\{weather_condition\}/#(${SCRIPT_PATH} condition)}"
+  fi
+  if [[ "$updated" != "$val" ]]; then
+    tmux set-option -gq "$option" "$updated"
   fi
 }
 
