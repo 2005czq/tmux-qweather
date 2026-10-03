@@ -18,7 +18,7 @@ readonly HOURLY_CACHE_FILE="${CACHE_DIR}/hourly_cache.json"
 readonly LOCK_FILE="${CACHE_DIR}/refresh.lock"
 
 declare -A COMPASS=([n]=北风 [nne]=东北偏北风 [ne]=东北风 [ene]=东北偏东风 [e]=东风 [ese]=东南偏东风 [se]=东南风 [sse]=东南偏南风 [s]=南风 [ssw]=西南偏南风 [sw]=西南风 [wsw]=西南偏西风 [w]=西风 [wnw]=西北偏西风 [nw]=西北风 [nnw]=西北偏北风)
-declare -A MOON=([新月]=󰽤 [蛾眉月]=󰽥 [上弦月]=󰽦 [盈凸月]=󰽧 [满月]=󰽢 [望月]=󰽢 [亏凸月]=󰽨 [下弦月]=󰽩 [残月]=󰽪)
+declare -A MOON=([新月]=󰽤 [朔月]=󰽤 [蛾眉月]=󰽧 [峨眉月]=󰽧 [上弦月]=󰽡 [盈凸月]=󰽨 [满月]=󰽢 [望月]=󰽢 [亏凸月]=󰽦 [下弦月]=󰽣 [残月]=󰽥)
 
 QWEATHER_HOST="devapi.qweather.com"
 QWEATHER_KEY=""
